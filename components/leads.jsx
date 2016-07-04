@@ -4,9 +4,9 @@ import { connect } from 'react-redux'
 import NewLead from './NewLead'
 import { addTodo, deleteTodo } from '../actions'
 
-const Todos = ({todos, dispatch}) => (
+const Leads = ({todos, dispatch}) => (
   <div>
-    <h1>Todos</h1>
+    <h1>Leads</h1>
     <NewLead onChange={e => {
       if(e.keyCode == 13){
         dispatch(addTodo(e.target.value))
@@ -41,4 +41,4 @@ function mapStateToProps(todos) {
   }
 }
 
-export default connect(mapStateToProps)(Todos)
+export default connect(mapStateToProps)(Leads)
