@@ -13,9 +13,25 @@ const Todos = ({todos, dispatch}) => (
         e.target.value = ''
       }
     }}/>
-    {todos.map((todo, index) => <p key={index}>{todo} <button onClick={e => {
-      dispatch(deleteTodo(index))
-    }}>X</button></p>)}
+    {
+      todos.map
+      (
+        (todo, index) => 
+          <p key={index}>
+            {todo}
+            <button onClick=
+              {
+                e => 
+                {
+                  dispatch(deleteTodo(index))
+                }
+              }
+            >
+            X
+            </button>
+          </p>
+      )
+    }
   </div>
 )
 
