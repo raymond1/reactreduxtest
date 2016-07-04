@@ -1,13 +1,13 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import NewTodo from './NewTodo'
+import NewLead from './NewLead'
 import { addTodo, deleteTodo } from '../actions'
 
 const Todos = ({todos, dispatch}) => (
   <div>
     <h1>Todos</h1>
-    <NewTodo onChange={e => {
+    <NewLead onChange={e => {
       if(e.keyCode == 13){
         dispatch(addTodo(e.target.value))
         e.target.value = ''
