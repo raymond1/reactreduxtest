@@ -2,28 +2,38 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import NewLead from './NewLead'
-import { addTodo, deleteTodo } from '../actions'
+import { addLead, deleteLead } from '../actions'
+import PhoneNumber from './PhoneNumber'
 
-const Leads = ({todos, dispatch}) => (
+function mapStateToProps(leads) {
+  return {
+    leads
+  }
+}
+
+const Leads = ({leads, dispatch}) => (
   <div>
     <h1>Leads</h1>
-    <NewLead onChange={e => {
-      if(e.keyCode == 13){
-        dispatch(addTodo(e.target.value))
-        e.target.value = ''
+    <NewLead onChange={
+      e => {
+        if(e.keyCode == 13){
+          dispatch(addLead(e.target.value, ''))
+          e.target.value = ''
+        }
       }
-    }}/>
+    }/>
     {
-      todos.map
+      leads.map
       (
-        (todo, index) => 
+        (lead, index, arrayPassedIn) => 
           <p key={index}>
-            {todo}
+            {lead}
+            <PhoneNumber />
             <button onClick=
               {
                 e => 
                 {
-                  dispatch(deleteTodo(index))
+                  dispatch(deleteLead(index))
                 }
               }
             >
@@ -35,10 +45,5 @@ const Leads = ({todos, dispatch}) => (
   </div>
 )
 
-function mapStateToProps(todos) {
-  return {
-    todos
-  }
-}
 
 export default connect(mapStateToProps)(Leads)

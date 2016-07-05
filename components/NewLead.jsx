@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-const NewTodo = ({onChange}) => 
+const NewLead = ({onChange}) => 
 (
   <div>
     <h3>New</h3>
@@ -9,4 +9,4 @@ const NewTodo = ({onChange}) =>
   </div>
 )
 
-export default NewTodo
+export default NewLead
