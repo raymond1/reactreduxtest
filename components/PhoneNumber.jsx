@@ -4,19 +4,18 @@ import {editPhoneNumber} from '../actions'
 
 
 const PhoneNumber = 
-({phoneNumber, dispatch}) => (
+({phoneNumber, index, dispatch}) => (
 <input type='text'
   onChange={
-    e =>
-    (
-      dispatch(editPhoneNumber(e.target.value, e.target))
-    )
+    e => {
+      dispatch(editPhoneNumber('905.527.2251', index))
+    }
   }
 />
 )
 
-function mapStateToProps(phoneNumber){
-  return {phoneNumber}
+function mapStateToProps(phoneNumber, index){
+  return {phoneNumber: phoneNumber, index: index}
 }
 
 export default connect(mapStateToProps)(PhoneNumber)

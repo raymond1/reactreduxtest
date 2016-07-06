@@ -12,9 +12,10 @@ export function deleteLead(index){
   }
 }
 
-export function editPhoneNumber(phoneNumber){
+export function editPhoneNumber(phoneNumber, index){
   return {
     type: 'editPhoneNumber',
-    phoneNumber
+    phoneNumber: phoneNumber,
+    index: index
   }
 }

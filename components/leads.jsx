@@ -17,7 +17,7 @@ const Leads = ({leads, dispatch}) => (
     <NewLead onChange={
       e => {
         if(e.keyCode == 13){
-          dispatch(addLead(e.target.value, ''))
+          dispatch(addLead({name: e.target.value}))
           e.target.value = ''
         }
       }
@@ -27,8 +27,8 @@ const Leads = ({leads, dispatch}) => (
       (
         (lead, index, arrayPassedIn) => 
           <p key={index}>
-            {lead}
-            <PhoneNumber />
+            {lead.name}
+            <PhoneNumber key={index} />
             <button onClick=
               {
                 e => 
