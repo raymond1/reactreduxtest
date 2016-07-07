@@ -31,6 +31,7 @@ const Leads = ({leads, dispatch}) => (
           <p key={index}>
             {lead.name}
             <PhoneNumber index={index} phoneNumber={lead.phoneNumber} />
+            <LogCall index={index}/>
             <button onClick=
               {
                 e => 

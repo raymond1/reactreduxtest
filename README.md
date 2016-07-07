@@ -1,7 +1,8 @@
-# CRM - demo - redux
+I was given a coding challenge based off of
+http://reactjsnews.com/your-first-redux-app.
 
-Based off of http://reactjsnews.com/your-first-redux-app to provide simple CRM functionality, such as:
-* Add a lead (name, phone number),
+My task was to provide CRM functionality, such as:
+* Add a lead (name, phone number), --Done
 * Log a call,
 * Schedule an appointment,
 * Convert lead to account
@@ -17,5 +18,7 @@ To run the app:
 npm install
 npm start
 ```
+
+(If you use Debian, like me, then you might have to make a soft link to call nodejs node)
 
 Load `http://localhost:8080`
