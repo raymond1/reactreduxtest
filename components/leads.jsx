@@ -4,7 +4,9 @@ import { connect } from 'react-redux'
 import NewLead from './NewLead'
 import { addLead, deleteLead } from '../actions'
 import PhoneNumber from './PhoneNumber'
+import OpenCallLog from './OpenCallLog'
 import Immutable from 'immutable'
+import CallLog from './CallLog'
 
 function mapStateToProps(state) {
   var tempState = state.toArray()
@@ -28,21 +30,27 @@ const Leads = ({leads, dispatch}) => (
       leads.map
       (
         (lead, index, arrayPassedIn) => 
-          <p key={index}>
-            {lead.name}
-            <PhoneNumber index={index} phoneNumber={lead.phoneNumber} />
-            <LogCall index={index}/>
-            <button onClick=
-              {
-                e => 
-                {
-                  dispatch(deleteLead(index))
-                }
-              }
-            >
-            X
-            </button>
-          </p>
+          (
+            <div key={`lead${index}`}>
+              <p>
+                {lead.name}
+
+                <PhoneNumber index={index} phoneNumber={lead.phoneNumber} />
+                <OpenCallLog index={index}/>
+                <button onClick=
+                  {
+                    e => 
+                    {
+                      dispatch(deleteLead(index))
+                    }
+                  }
+                >
+                X
+                </button>
+              </p>
+              <CallLog index={index}/>
+            </div>
+          )
       )
     }
   </div>

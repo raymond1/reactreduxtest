@@ -19,3 +19,18 @@ export function editPhoneNumber(phoneNumber, index){
     index: index
   }
 }
+
+export function openCallLog(index){
+  return {
+    type: 'openCallLog',
+    index: index
+  }
+}
+
+export function logCall(index, dateTime){
+  return {
+    type: 'logCall',
+    index,
+    dateTime
+  }
+}
