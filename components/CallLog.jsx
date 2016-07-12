@@ -1,12 +1,13 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {logCall} from '../actions'
+import VisibleCallLog from './VisibleCallLog'
 
-const CallLog = (index)=>(
+const CallLog = (props)=>(
   <div>
-    <label htmlFor={`logCallForm{$index}`}>Enter a call time and press enter to log a call</label>
-    &nbsp;&nbsp;<input type='text' key={`logCallForm{$index}`} />
-                <button>Delete</button>
+    {
+      (props.visible)?<VisibleCallLog/>:null
+    }
   </div>
 )
 
@@ -21,4 +22,13 @@ function mapDispatchToProps(dispatch, ownProps){
   }
 }
 
-export default connect(null, mapDispatchToProps)(CallLog)
+function mapStateToProps(state, props){
+  var stateJS = state.toJS()
+  var callTimes = stateJS[props.index].callTimes
+  return {
+    callTimes,
+    visible: stateJS[props.index].callLogVisible
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CallLog)

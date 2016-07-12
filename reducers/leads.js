@@ -9,15 +9,16 @@ function deepCloneState(state){
     newState[i] = {}
     newState[i].name = '' + stateArray[i].name
     newState[i].phoneNumber = '' + stateArray[i].phoneNumber
-    newState[i].loggedCalls = []
-    for (var j = 0; j < stateArray[i].loggedCalls.length; j++){
-      newState[i].loggedCalls[j] = '' + stateArray[i].loggedCalls[j]
+    newState[i].callTimes = []
+    for (var j = 0; j < stateArray[i].callTimes.length; j++){
+      newState[i].callTimes[j] = '' + stateArray[i].callTimes[j]
     }
+    newState[i].callLogVisible = stateArray[i].callLogVisible
   }
   return Immutable.List(newState)
 }
 
-export default (state = Immutable.List([{name: 'Person1', phoneNumber: '9011.12312', loggedCalls: ['Saturday at 1:00pm']}]), action) => {
+export default (state = Immutable.List([{name: 'Person1', phoneNumber: '9011.12312', callLogVisible: false, callTimes: ['Saturday at 1:00pm']}]), action) => {
   switch(action.type) {
     case 'addLead':
       var newState = state.unshift({name: action.lead.name, phoneNumber: action.lead.phoneNumber})
@@ -37,15 +38,33 @@ export default (state = Immutable.List([{name: 'Person1', phoneNumber: '9011.123
       }
       var newState = Immutable.List(tempState)
       return newState
-    case 'openCallLog':
-      var stateArray = deepCloneState(state)
+    case 'makeCallLogVisible':
+      var stateArray = deepCloneState(state).toArray()
       var index = action.index
-      stateArray[i].showCallLog = true
-    case 'logCall':
-      var stateArray = deepCloneState(state)
-      stateArray[action.index].loggedCalls.append({dateTime: '' + action.dateTime}) 
+      stateArray[i].callLogVisible = true
       var newState = Immutable.List(stateArray)
       return newState
+    case 'makeCallLogInvisible':
+      var stateArray = deepCloneState(state).toArray()
+      var index = action.index
+      stateArray[i].callLogVisible = false
+      var newState = Immutable.List(stateArray)
+      return newState
+    case 'toggleCallLogVisibility':
+      var stateArray = deepCloneState(state).toArray()
+      var index = action.index
+      stateArray[index].callLogVisible = !stateArray[index].callLogVisible
+      var newState = Immutable.List(stateArray)
+      return newState
+    case 'logCall':
+      var stateArray = deepCloneState(state)
+      stateArray[action.index].callTimes.append({dateTime: '' + action.dateTime}) 
+      var newState = Immutable.List(stateArray)
+      return newState
+    case 'addNewCallTime':
+      var cloneState = state.toJS()
+      cloneState[action.index].callTimes.push(action.time)
+      return Immutable.List(cloneState)
     default:
       return state
   }

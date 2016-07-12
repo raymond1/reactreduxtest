@@ -20,10 +20,24 @@ export function editPhoneNumber(phoneNumber, index){
   }
 }
 
-export function openCallLog(index){
+export function makeCallLogVisible(index){
   return {
-    type: 'openCallLog',
+    type: 'makeCallLogVisible',
     index: index
+  }
+}
+
+export function makeCallLogInvisible(index){
+  return {
+    type: 'makeCallLogInvisible',
+    index: index
+  }
+}
+
+export function toggleCallLogVisibility(index){
+  return {
+    type: 'toggleCallLogVisibility',
+    index
   }
 }
 
@@ -32,5 +46,13 @@ export function logCall(index, dateTime){
     type: 'logCall',
     index,
     dateTime
+  }
+}
+
+export function addNewCallTime(index,time){
+  return {
+    type: 'addNewCallTime',
+    index,
+    time
   }
 }
