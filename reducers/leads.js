@@ -21,7 +21,7 @@ function deepCloneState(state){
 export default (state = Immutable.List([{name: 'Person1', phoneNumber: '9011.12312', callLogVisible: false, callTimes: ['Saturday at 1:00pm']}]), action) => {
   switch(action.type) {
     case 'addLead':
-      var newState = state.unshift({name: action.lead.name, phoneNumber: action.lead.phoneNumber})
+      var newState = state.unshift({name: action.lead.name, phoneNumber: action.lead.phoneNumber, callTimes: [], callLogVisible: false})
       return newState 
     case 'deleteLead':
       return state.filter((lead, index) => index !== action.index)
@@ -39,23 +39,19 @@ export default (state = Immutable.List([{name: 'Person1', phoneNumber: '9011.123
       var newState = Immutable.List(tempState)
       return newState
     case 'makeCallLogVisible':
-      var stateArray = deepCloneState(state).toArray()
-      var index = action.index
-      stateArray[i].callLogVisible = true
+      var stateArray = state.toJS()
+      stateArray[action.index].callLogVisible = true
       var newState = Immutable.List(stateArray)
       return newState
     case 'makeCallLogInvisible':
-      var stateArray = deepCloneState(state).toArray()
-      var index = action.index
-      stateArray[i].callLogVisible = false
+      var stateArray = state.toJS()
+      stateArray[action.index].callLogVisible = false
       var newState = Immutable.List(stateArray)
       return newState
     case 'toggleCallLogVisibility':
-      var stateArray = deepCloneState(state).toArray()
-      var index = action.index
-      stateArray[index].callLogVisible = !stateArray[index].callLogVisible
-      var newState = Immutable.List(stateArray)
-      return newState
+      var stateArray = state.toJS()
+      stateArray[action.index].callLogVisible = !stateArray[action.index].callLogVisible
+      return Immutable.List(stateArray)
     case 'logCall':
       var stateArray = deepCloneState(state)
       stateArray[action.index].callTimes.append({dateTime: '' + action.dateTime}) 

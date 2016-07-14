@@ -3,30 +3,23 @@ import {connect} from 'react-redux'
 import {logCall} from '../actions'
 import VisibleCallLog from './VisibleCallLog'
 
-const CallLog = (props)=>(
+const CallLog = (props)=>
+(
   <div>
     {
-      (props.visible)?<VisibleCallLog/>:null
+      (props.visible)?<VisibleCallLog index={props.index} callTimes={props.callTimes}/>:null
     }
   </div>
 )
 
 function mapDispatchToProps(dispatch, ownProps){
   return {
-    onKeyDown: function(e){
-      if (e.keyCode ==13)
-      {
-        dispatch(logCall(ownProps.index, e.target.value))
-      }
-    }
   }
 }
 
 function mapStateToProps(state, props){
   var stateJS = state.toJS()
-  var callTimes = stateJS[props.index].callTimes
   return {
-    callTimes,
     visible: stateJS[props.index].callLogVisible
   }
 }

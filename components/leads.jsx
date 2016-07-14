@@ -7,6 +7,8 @@ import PhoneNumber from './PhoneNumber'
 import OpenCallLog from './OpenCallLog'
 import Immutable from 'immutable'
 import CallLog from './CallLog'
+import store from '../store'
+
 
 function mapStateToProps(state) {
   var tempState = state.toArray()
@@ -15,13 +17,13 @@ function mapStateToProps(state) {
   }
 }
 
-const Leads = ({leads, dispatch}) => (
+const Leads = ({leads}) => (
   <div>
     <h1>Leads</h1>
     <NewLead onChange={
       e => {
         if(e.keyCode == 13){
-          dispatch(addLead({name: e.target.value, phoneNumber: ''}))
+          store.dispatch(addLead({name: e.target.value, phoneNumber: ''}))
           e.target.value = ''
         }
       }
@@ -41,7 +43,7 @@ const Leads = ({leads, dispatch}) => (
                   {
                     e => 
                     {
-                      dispatch(deleteLead(index))
+                      store.dispatch(deleteLead(index))
                     }
                   }
                 >
