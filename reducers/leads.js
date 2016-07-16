@@ -18,7 +18,7 @@ function deepCloneState(state){
   return Immutable.List(newState)
 }
 
-export default (state = Immutable.List([{name: 'Person1', phoneNumber: '9011.12312', callLogVisible: false, callTimes: ['Saturday at 1:00pm']}]), action) => {
+export default (state = Immutable.List([{name: 'Person1', phoneNumber: '9011.12312', callLogVisible: false, callTimes: ['Saturday at 1:00pm'], appointmentMakerVisible: false, appointment:{set:false}}]), action) => {
   switch(action.type) {
     case 'addLead':
       var newState = state.unshift({name: action.lead.name, phoneNumber: action.lead.phoneNumber, callTimes: [], callLogVisible: false})
@@ -60,6 +60,10 @@ export default (state = Immutable.List([{name: 'Person1', phoneNumber: '9011.123
     case 'addNewCallTime':
       var cloneState = state.toJS()
       cloneState[action.index].callTimes.push(action.time)
+      return Immutable.List(cloneState)
+    case 'toggleAppointmentPicker':
+      var cloneState = state.toJS()
+      cloneState[action.index].appointmentPickerVisible = !cloneState[action.index].appointmentPickerVisible
       return Immutable.List(cloneState)
     default:
       return state

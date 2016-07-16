@@ -3,12 +3,12 @@ http://reactjsnews.com/your-first-redux-app.
 
 My task was to provide CRM functionality, such as:
 * Add a lead (name, phone number), --Done
-* Log a call,
+* Log a call --Done
 * Schedule an appointment,
 * Convert lead to account
 
 With bonus points for:
-* Updating the phone number,
+* Updating the phone number --Done
 * Using a date-picker for the appointment.
 
 In terms of visual styling, something similar to https://github.com/salesforce-ux/design-system is ideal

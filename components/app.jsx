@@ -7,7 +7,7 @@ import Leads from './leads'
 let reactElement = document.getElementById('react')
 render(
   <Provider store={store}>
-    <Leads displayName='Leads'/>
+    <Leads displayName='Leads' store={store}/>
   </Provider>,
   reactElement
 )

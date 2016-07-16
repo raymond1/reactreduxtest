@@ -56,3 +56,32 @@ export function addNewCallTime(index,time){
     time
   }
 }
+
+export function toggleAppointmentPicker(index){
+  return {
+    type:'toggleAppointmentPicker',
+    index
+  }
+}
+
+export function setAppointmentDate(index, date){
+  return {
+    type: 'setAppointmentDate',
+    date
+  }
+}
+
+export function setAppointmentTime(index, time){
+  return {
+    type: 'setAppointmentTime',
+    time
+  }
+}
+
+export function setAppointment(index,date,time){
+  return{
+    type: 'setAppointment',
+    date,
+    time
+  }
+}

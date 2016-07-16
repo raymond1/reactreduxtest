@@ -7,8 +7,9 @@ import PhoneNumber from './PhoneNumber'
 import OpenCallLog from './OpenCallLog'
 import Immutable from 'immutable'
 import CallLog from './CallLog'
-import store from '../store'
-
+//import store from '../store'
+import ScheduleAppointment from './ScheduleAppointment'
+import AppointmentPicker from './AppointmentPicker'
 
 function mapStateToProps(state) {
   var tempState = state.toArray()
@@ -17,19 +18,19 @@ function mapStateToProps(state) {
   }
 }
 
-const Leads = ({leads}) => (
+const Leads = (props) => (
   <div>
     <h1>Leads</h1>
-    <NewLead onChange={
+    <NewLead store={props.store} onChange={
       e => {
         if(e.keyCode == 13){
-          store.dispatch(addLead({name: e.target.value, phoneNumber: ''}))
+          props.store.dispatch(addLead({name: e.target.value, phoneNumber: ''}))
           e.target.value = ''
         }
       }
     }/>
     {
-      leads.map
+      props.leads.map
       (
         (lead, index, arrayPassedIn) => 
           (
@@ -39,17 +40,19 @@ const Leads = ({leads}) => (
 
                 <PhoneNumber index={index} phoneNumber={lead.phoneNumber} />
                 <OpenCallLog index={index}/>
+                <ScheduleAppointment index={index} store={props.store}/>
                 <button onClick=
                   {
                     e => 
                     {
-                      store.dispatch(deleteLead(index))
+                      props.store.dispatch(deleteLead(index))
                     }
                   }
                 >
                 X
                 </button>
               </p>
+              <AppointmentPicker index={index} visible={lead.appointmentPickerVisible}/>
               <CallLog index={index}/>
             </div>
           )
