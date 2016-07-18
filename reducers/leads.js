@@ -25,10 +25,10 @@ defaultDate.year(1982)
 defaultDate.month(3) 
 defaultDate.date(31) 
 
-export default (state = Immutable.List([{name: 'Person1', phoneNumber: '9011.12312', callLogVisible: false, callTimes: ['Saturday at 1:00pm'], appointmentMakerVisible: false, appointment:{set:false, date: defaultDate, time: '12'} }]), action) => {
+export default (state = Immutable.List([{name: 'Person1', phoneNumber: '9011.12312', callLogVisible: false, callTimes: ['Saturday at 1:00pm'], appointmentMakerVisible: false, appointment:{set:false, date: defaultDate, time: '12'}, isAccount: false }]), action) => {
   switch(action.type) {
     case 'addLead':
-      var newState = state.unshift({name: action.lead.name, phoneNumber: action.lead.phoneNumber, callLogVisible: false, callTimes: [], appointmentMakerVisible: false, appointment:{set: false, date: moment(), time: '3'}})
+      var newState = state.unshift({name: action.lead.name, phoneNumber: action.lead.phoneNumber, callLogVisible: false, callTimes: [], appointmentMakerVisible: false, appointment:{set: false, date: moment(), time: '3'}, isAccount: false})
       return newState 
     case 'deleteLead':
       return state.filter((lead, index) => index !== action.index)
@@ -74,6 +74,10 @@ export default (state = Immutable.List([{name: 'Person1', phoneNumber: '9011.123
     case 'clearAppointment':
       var cloneState = state.toJS()
       cloneState[action.index].appointment.set = false
+      return Immutable.List(cloneState)
+    case 'markLeadAsAccount':
+      var cloneState = state.toJS()
+      cloneState[action.index].isAccount = true
       return Immutable.List(cloneState)
     default:
       return state

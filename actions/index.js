@@ -93,3 +93,10 @@ export function clearAppointment(index){
     index
   }
 }
+
+export function markLeadAsAccount(index){
+  return{
+    type: 'markLeadAsAccount',
+    index
+  }
+}
