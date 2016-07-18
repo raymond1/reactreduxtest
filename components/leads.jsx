@@ -10,6 +10,7 @@ import CallLog from './CallLog'
 //import store from '../store'
 import ScheduleAppointment from './ScheduleAppointment'
 import AppointmentPicker from './AppointmentPicker'
+import AppointmentIndicator from './AppointmentIndicator'
 
 function mapStateToProps(state) {
   var tempState = state.toArray()
@@ -18,6 +19,9 @@ function mapStateToProps(state) {
   }
 }
 
+var style = {
+  border: '2px #ff00ff solid'
+}
 const Leads = (props) => (
   <div>
     <h1>Leads</h1>
@@ -34,13 +38,14 @@ const Leads = (props) => (
       (
         (lead, index, arrayPassedIn) => 
           (
-            <div key={`lead${index}`}>
-              <p>
+            <div key={`lead${index}`} style={style}>
+              <div>
                 {lead.name}
 
                 <PhoneNumber index={index} phoneNumber={lead.phoneNumber} />
                 <OpenCallLog index={index}/>
                 <ScheduleAppointment index={index} store={props.store}/>
+                <AppointmentIndicator index={index}/>
                 <button onClick=
                   {
                     e => 
@@ -49,10 +54,10 @@ const Leads = (props) => (
                     }
                   }
                 >
-                X
+                Delete Lead
                 </button>
-              </p>
-              <AppointmentPicker index={index} visible={lead.appointmentPickerVisible}/>
+              </div>
+              <AppointmentPicker index={index} visible={lead.appointmentPickerVisible} appointment={lead.appointment}/>
               <CallLog index={index}/>
             </div>
           )

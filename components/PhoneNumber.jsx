@@ -4,8 +4,8 @@ import {editPhoneNumber} from '../actions'
 
 
 const PhoneNumber = React.createClass({
-  render: function(phoneNumber, index){
-    return (<input type='text' value={this.props.phoneNumber} onChange={this.props.onChange} onKeyDown={this.handleKeyDown}/>);
+  render: function(){
+    return (<div><label htmlFor={`phoneNumber${this.props.index}`} >Phone Number:</label><input id={`phoneNumber${this.props.index}`}type='text' value={this.props.phoneNumber} onChange={this.props.onChange} /></div>);
   }
 })
 

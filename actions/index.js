@@ -81,7 +81,15 @@ export function setAppointmentTime(index, time){
 export function setAppointment(index,date,time){
   return{
     type: 'setAppointment',
+    index,
     date,
     time
+  }
+}
+
+export function clearAppointment(index){
+  return {
+    type: 'clearAppointment',
+    index
   }
 }

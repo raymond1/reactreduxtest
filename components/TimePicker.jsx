@@ -2,7 +2,7 @@ import React from 'react'
 
 const TimePicker = (props, context) => 
 (
-  <select defaultValue="9">
+  <select value={props.time} onChange={props.onChange}>
     <option value="0">00:00</option>
     <option value="1">01:00</option>
     <option value="2">02:00</option>
